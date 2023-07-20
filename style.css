@@ -1,0 +1,522 @@
+*{
+  margin : 0;
+  padding : 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  color: white;
+}
+html {
+font-size: 16px;
+}
+
+
+body {
+  background-color: black;
+}
+
+#contenair {
+  max-width: 1280px;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.homepage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  background-image: url("./inspirations/FOND.jpg");
+  background-size: auto;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+}
+.bg-dark {
+  background-image: url("./inspirations/coffee-gb7f9a2f14_1280.jpg") !important;
+}
+#backgroundimage_left {
+  width: 70%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#navbar {
+  width: 791px;
+  height: 32px;
+  background-color: transparent;
+}
+.listenavbar {
+  display: flex;
+  font-family : 'Roboto Mono', monospace;
+  padding-left: 60px;
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color : rgb(125, 117, 117);
+  font-size: 1rem;
+}
+a:hover {
+  color : white;
+}
+
+.navigation {
+  border-right: 2px solid white;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.bigtitle {
+  width: 791px;
+  height: 300px;
+  display: flex;
+  padding-left: 80px;
+}
+
+h1 {
+  font-size: 4.5rem;
+  font-family : Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  margin-bottom: 150px;
+}
+
+#darkmode {
+  width: 45px;
+  height: 45px;
+  margin-bottom: 100px;
+  padding-left: 20px;
+}
+#darklight {
+background-color: white;
+cursor: pointer;
+}
+#darklight:hover {
+background-color: #999595;
+color: black;
+}
+.roundlight {
+width: 45px;
+height: 45px;
+border-radius: 50%;
+background-image:url("./univers/icons/light-bulb-inside-a-rounded-square_icon-icons.com_70689.png");
+background-size: contain;
+margin-left: 60px;
+}
+
+#backstrokes {
+  width: 34%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: url("./inspirations/AmpouleStrokes2.jpg");
+  opacity: 0;
+}
+#backstrokesBM {
+  background-image: transparent;
+}
+
+.flicker-2:hover {
+-webkit-animation: flicker-2 2s linear 2 both;
+        animation: flicker-2 2s linear 2 both;
+}
+@-webkit-keyframes flicker-2 {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  41.99% {
+    opacity: 1;
+  }
+  42% {
+    opacity: 0;
+  }
+  43% {
+    opacity: 0;
+  }
+  43.01% {
+    opacity: 1;
+  }
+  45.99% {
+    opacity: 1;
+  }
+  46% {
+    opacity: 0;
+  }
+  46.9% {
+    opacity: 0;
+  }
+  46.91% {
+    opacity: 1;
+  }
+  51.99% {
+    opacity: 1;
+  }
+  52% {
+    opacity: 0;
+  }
+  52.8% {
+    opacity: 0;
+  }
+  52.81% {
+    opacity: 1;
+  }
+}
+@keyframes flicker-2 {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  41.99% {
+    opacity: 1;
+  }
+  42% {
+    opacity: 0;
+  }
+  43% {
+    opacity: 0;
+  }
+  43.01% {
+    opacity: 1;
+  }
+  45.99% {
+    opacity: 1;
+  }
+  46% {
+    opacity: 0;
+  }
+  46.9% {
+    opacity: 0;
+  }
+  46.91% {
+    opacity: 1;
+  }
+  51.99% {
+    opacity: 1;
+  }
+  52% {
+    opacity: 0;
+  }
+  52.8% {
+    opacity: 0;
+  }
+  52.81% {
+    opacity: 1;
+  }
+}
+#workspage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 30px 0 30px;
+}
+
+#workstop {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  font-family : 'Roboto Mono', monospace;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title {
+  height: 30px;
+  font-size: 2.5rem;
+  border-right: 2px solid white;
+  border-left: 2px solid white;
+  padding : 30px;
+  display : flex;
+  align-items: center;
+}
+
+#blabla {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 30px;
+}
+
+#worksbottom {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: row;
+  font-family : 'Roboto Mono', monospace;
+  justify-content: space-around;
+  padding-top: 30px;
+  position: relative;
+}
+.demo {
+  width: 30%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#p1 {
+  background-image: url("./inspirations/DAY1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#p2 {
+  background-image: url("./inspirations/DAY2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#p3 {
+  background-image: url("./inspirations/DAY1bis.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.resume {
+  width: 80%;
+  height: 45vh;
+  background-color: rgba(0, 0, 0, 0.767);
+  position: absolute;
+  display: flex;
+  justify-content: space-evenly;
+  top : 90px;
+  padding: 30px 40px 0px 40px;
+}
+.date {
+  font-size: 0.8rem;
+  margin : 0 0 10px 0;
+}
+.projectname {
+  font-size: 1.3rem;
+  margin : 0 0 10px 0;
+}
+.explanation {
+  font-size: 0.8rem;
+  color : white;
+  margin : 0 0 20px 0;
+}
+
+#toback {
+  background-color: white;
+}
+#toback:hover {
+  background-color: #999595;
+  color: black;
+}
+.previous {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-image:url("./univers/icons/back.svg");
+  position: absolute;
+  z-index: 1;
+  left : -10px;
+  bottom: 230px;
+}
+
+#tonext {
+  background-color: white;
+}
+#tonext:hover {
+  background-color: #999595;
+  color: black;
+}
+.next {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-image:url("./univers/icons/next.svg");
+  position: absolute;
+  z-index: 1;
+  right : -10px;
+  bottom: 230px;
+}
+
+#aboutpage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 30px 0 30px;
+}
+
+#abouttop {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  font-family : 'Roboto Mono', monospace;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#aboutbottom {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+  font-family : 'Roboto Mono', monospace;
+  justify-content: space-evenly;
+  padding-top: 30px;
+}
+#descriptionme {
+  width: 100%;
+  height: 100%;
+  text-align :right;
+  font-size: 0.65rem;
+  margin-right: 30px;
+}
+#pictureme {
+  width: 40%;
+  height: 90%;
+  background-image: url("./inspirations/pictureme.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-left: 10px;
+}
+.cadre {
+  width: 40%;
+  height: 90%;
+  margin-left: 10px;
+  overflow-y: hidden
+}
+#contactpage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 20px 0 20px;
+}
+
+#contacttop {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  font-family : 'Roboto Mono', monospace;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#contactmiddle {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+}
+#fondcentral {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  justify-content: space-around;
+}
+#leftcontact {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.txtenter {
+width: 100%;
+height: 10%;
+border : 2px solid rgb(125, 117, 117);
+display: flex;
+align-items: center;
+padding-left: 10px;
+}
+#message {
+width: 100%;
+height: 40%;
+border : 2px solid rgb(125, 117, 117);
+padding: 10px 0 0 10px;
+}
+p {
+font-size: 1rem;
+font-family: 'Roboto Mono', monospace;
+color :rgb(125, 117, 117);
+}
+#rightcontact {
+width: 35%;
+height: 70%;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+}
+#perso {
+width: 100%;
+height: 40%;
+display: flex;
+flex-direction: column;
+margin: 0px 30px 0 0;
+}
+.infosperso {
+width: 100%;
+height: 33%;
+display: flex;
+}
+.icon {
+display: flex;
+flex-direction: row;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+background-color: white;
+margin-right: 0px;
+}
+#tel {
+background-image:url("./univers/icons/phone-symbol-of-an-auricular-inside-a-circle_icon-icons.com_56478.png");
+background-size: cover;
+margin: 0 15px 0 0;
+}  
+#mel {
+background-image:url("./univers/icons/mel.png");
+background-size: cover;
+margin: 0 15px 0 0;
+}  
+#addr {
+background-image:url("./univers/icons/addr.png");
+background-size: cover;
+margin: 0 15px 0 0;
+}  
+
+#ldk {
+background-image:url("./univers/icons/linkedin_black_logo_icon_147114.png");
+background-size: contain;
+margin: 0 15px 0 0;
+}  
+
+#follow {
+font-size: 2rem;
+}
+#button {
+width: 100px;
+height: 70px;
+background-color: black;
+font-family:'Roboto Mono', monospace;
+font-size: 1.5rem;
+border: 2px solid white;
+text-decoration: none;
+justify-content: center;
+display: flex;
+align-items: center;
+}
+
+
+.light {
+  color : black !important;
+  background-color: white !important;
+}
+
+
+
+@media  screen and (max-width:767px) {
+  
+}
