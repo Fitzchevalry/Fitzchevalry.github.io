@@ -1,0 +1,67 @@
+/* CSS Responsive mobile */
+
+/* mp + header */
+header {
+    flex-direction: column;
+    padding-top: 2rem;
+}
+
+.mp-logo {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mp-logo i {
+    color: rgba(136, 214, 231, 1);
+    margin-bottom: 1rem;
+}
+
+header ul {
+    margin: 1rem;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+header ul a{
+    font-weight: bolder;
+}
+
+.mp-container {
+    background: white;
+}
+.mp-content h2{
+    font-size: 2.5rem;
+}
+.mp-content p {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+}
+
+/* Le Jeu */
+.game {
+    padding: 3rem 1rem 3rem;
+}
+.game-container{
+    display: none;
+}
+
+#game-error {
+    display: block;
+}
+
+/* cv reveal */
+
+.hide-cv {
+    padding: 3rem 1rem 3rem;
+}
+
+/* Footer */
+footer p {
+    margin-bottom: 0;
+    padding: 1rem 2rem;
+    color : whitesmoke;
+    text-align: center;
+    font-size: 0.7rem;
+}

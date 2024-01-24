@@ -1,0 +1,30 @@
+body {
+    background: rgba(136, 214, 231, 1);
+}
+
+.mp-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: rgba(136, 214, 231, 1);
+}
+
+.mp{
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.game {
+    display: flex;
+    min-height: 729px;
+    flex-direction: column;
+    justify-content: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.hide-cv {
+    min-height: 729px;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}

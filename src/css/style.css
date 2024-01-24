@@ -1,0 +1,428 @@
+/* reset */
+* {
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+
+}
+
+/* Color Palet
+taupe-gray: rgba(139, 133, 137, 1);
+paynes-gray: rgba(91, 117, 134, 1);
+dark-purple: rgba(56, 37, 65, 1);
+non-photo-blue: rgba(136, 214, 231, 1);
+tea-green: rgba(195, 233, 197, 1);
+*/
+
+body {
+    font-family: 'Raleway', sans-serif;
+    /* font-family: 'Roboto', sans-serif;
+    font-family: 'Limelight', sans-serif;
+    font-family: 'Monoton', sans-serif; */
+}
+
+p {
+    margin-bottom : 0.8rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* mp + header */
+.mp-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+/*header */
+
+header {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0.5rem 3rem;
+    background-color: rgba(56, 37, 65, 1);
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1rem;
+    cursor: url(/src/img/icons/paw-solidblc.png), pointer;
+}
+
+span {
+    font-family: 'Roboto', sans-serif;
+}
+
+header ul {
+    display: flex;
+    flex-flow: row nowrap;
+    list-style: none;
+}
+
+header ul li {
+    padding: 1rem;
+}
+
+header ul li a:hover {
+    color: rgba(91, 117, 134, 1);
+}
+
+header a {
+    color: whitesmoke;
+    font-weight: 400;
+    cursor: url(/src/img/icons/paw-solidblc.png), pointer;
+}
+
+a span {
+    color : rgba(136, 214, 231, 1);
+}   
+
+.mp-logo {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.mp-logo i {
+    color: rgba(136, 214, 231, 1);
+    margin-right: 1rem;
+}
+
+
+/*Main Page*/
+.mp{
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 729px;
+    background: url(/src/img/backgrounds/FONDRetoucheOk.png) center center/cover;
+}
+.mp-content {
+    max-width: 800px;
+    text-align: center;
+    color : rgba(56, 37, 65, 1);
+    /* border: 0.5rem solid rgba(56, 37, 65, 1); */
+    padding: 2rem;
+    margin-bottom: 6rem;
+}
+h2 {
+    font-size: 2.8rem;
+    color : rgba(56, 37, 65, 1);
+    text-align: center;
+}
+
+.mp-content p {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 1.5rem;
+}
+
+/* Le Jeu */
+.game {
+    padding: 6rem 4rem;
+    background: url(/src/img/backgrounds/reversefox.png) center center /cover;
+}
+
+.mp-game {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    justify-content: center;
+}
+
+#game-error {
+    display: none;
+    text-align: center;
+}
+
+.game h2{
+    padding: 4rem 0 2rem 0;
+}
+
+.game-container{
+    position: relative;
+    display: flex;
+    width: 1000px;
+    height: 500px;
+    justify-content: center;
+    border: 0.5rem solid rgba(56, 37, 65, 1);
+    overflow: hidden;
+}
+
+/* Game Elements */
+#background-sky {
+    position: absolute;
+    width: 100%; /* Double the width for repetition */
+    height: 100%;
+    background: url(/src/img/backgrounds/layers/sky.png) center center/cover;
+    background-repeat: no-repeat;
+}
+
+#background-win {
+    position: absolute;
+    width: 100%; /* Double the width for repetition */
+    height: 100%;
+    background: url(/src/img/backgrounds/layers/game_background_win.png) center center/cover;
+    background-repeat: no-repeat;
+    display: none;
+}
+
+#background-dark-sky {
+    position: absolute;
+    width: 100%; /* Double the width for repetition */
+    height: 100%;
+    background: url(/src/img/backgrounds/layers/darksky.png) center center/cover;
+    background-repeat: no-repeat;
+    display: none;
+}
+
+#background-cloud {
+    position: absolute;
+    width: 100%; /* Double the width for repetition */
+    height: 100%;
+    background: url(/src/img/backgrounds/layers/clouds_2.png) center center/cover;
+    z-index: 1;
+}
+
+#background {
+    position: absolute;
+    width: 100%; /* Double the width for repetition */
+    height: 100%;
+    background: url(/src/img/backgrounds/layers/rocks_2.png) center center/cover;
+    background-repeat: no-repeat;
+    z-index: 2;
+}
+  
+#fox {
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 195.25px;
+    height: 77px;
+    background: url(/src/img/fox/foxRun.png);
+    z-index: 3;
+    display: none;
+}
+
+#obstacle {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 90px;
+    height: 60px;
+    background : url(/src/img/obstacles/obstacle1.png); 
+    background-size: cover;
+    z-index: 3;
+    display: none;
+}  
+
+#obstacle2 {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 90px;
+    height: 60px;
+    background : url(/src/img/obstacles/obstacle2.png); 
+    background-size: cover;
+    z-index: 3;
+    display: none;
+}  
+
+#start-message {
+    position: absolute;
+    top : 25%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 10;
+}
+
+#start-message span {
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    width: 51px;
+    height: 36px;
+    margin: 0.5rem;
+}
+
+#start-button {
+    background-color: rgba(56, 37, 65, 0.966);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    height: 36px;
+    padding: 0 16px;
+    text-align: center;
+    cursor: url(/src/img/icons/paw-solidblc.png), pointer;
+}
+
+#start-button:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+    color: rgba(136, 214, 231, 1);
+}
+
+#game-over-message {
+    position: absolute;
+    top : 45%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    display: none;
+    z-index: 10;
+    cursor: url(/src/img/icons/paw-solidbcl.svg), pointer;
+}
+
+#restart-button {
+    background-color: rgba(56, 37, 65, 0.966);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    height: 36px;
+    padding: 0 16px;
+    text-align: center;
+    cursor: url(/src/img/icons/paw-solidblc.png), pointer;
+    }
+
+#restart-button:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+    color: rgba(136, 214, 231, 1);
+    }
+
+#score {
+    display: flex;
+    z-index: 10;
+    position: absolute;
+    text-align: end;
+    margin-top: 2rem;
+    margin-left: 75%;
+    font-family: 'Limelight', sans-serif;
+    color: rgba(56, 37, 65, 1);
+}
+
+/* Fenêtre Win */
+#win-game {
+    position: absolute;
+    top : 45%;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 10;
+    display: none;
+}
+
+#show-cv {
+    background-color: rgba(56, 37, 65, 0.966);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    height: 36px;
+    padding: 0 16px;
+    text-align: center;
+    cursor: url(/src/img/icons/paw-solidblc.png), pointer;
+}
+
+#show-cv:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+    color: rgba(136, 214, 231, 1);
+}
+
+/* Reveal CV */
+
+
+.hide-cv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 4rem 6rem 4rem;
+    background: url(/src/img/backgrounds/FONDRetoucheOk.png) center center/cover;
+    background-position-y: top;
+    display: none;
+}
+
+.cv-contain a {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.hide-cv h2 {
+    padding-bottom: 2rem;
+}
+
+.cv-contain {
+    display: flex;
+    width: 80%;
+}
+
+.cv {
+    width: 50%;
+    display: inline;
+}
+
+
+
+/* Footer */
+
+footer {
+    background: rgba(56, 37, 65, 1);
+}
+footer p {
+    margin-bottom: 0;
+    padding: 1rem 6rem;
+    color : whitesmoke;
+    text-align: center;
+    font-size: 0.7rem;
+}
+
+
+/*main {
+    width: 100vw;
+    height: 80vh;
+    background-image: url(./src/FONDRetoucheOk.png);
+    background-size: cover;
+    background-position-y: -370px ;
+    position:static;
+}
+.mp {
+    display: flex;
+    flex: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.monJeu {
+    display: flex;
+    min-width: 960px;
+    width: 1200px;
+    height: 540px;
+    margin-bottom: 8rem;
+    border: 0.5rem solid rgba(56, 37, 65, 1);
+    background-image: url(./src/backgrounds/game_background_1.png);
+    background-repeat: repeat;
+    background-size: contain ;    
+}*/

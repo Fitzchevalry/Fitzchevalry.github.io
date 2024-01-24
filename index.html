@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="stylesheet" media="(max-width: 576px)" href="./src/css/style-mobile.css">
+    <link rel="stylesheet" media="(min-width:1620px)" href="./src/css/style-ls.css">
+    
+    <link rel="icon" href="./src/img/icons/gamepad-solid.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Monoton&display=swap" rel="stylesheet">
+    <script src="./vendors/jQuery/jquery.js"></script>
+    <script src="https://kit.fontawesome.com/8c68d49fdd.js" crossorigin="anonymous"></script>
+    <title>Melody Jacquemin - Développeuse FullStack</title>
+</head>
+<body>
+    <div class="mp-container">
+        <header>
+            <h1 class="mp-logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <a href="#">MJ - <span>Kitsune game CV</span></a>
+            </h1>
+            <ul>
+                <li><a href="#instructions">Instructions</a></li>
+                <li><a href="#the-game">Jeu</a></li>
+                <li><a href="./src/img/cv/CV-pdf/MelodyJacquemin-Développeuse-Full-Stack-pastel.pdf" target="_blank">Cheat</a></li>
+            </ul>
+        </header>
+        <section id="instructions" class="mp">
+            <div class="mp-content">
+                <h2>Instructions</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore quaerat, totam est impedit adipisci quibusdam enim facilis laborum recusandae unde suscipit rem repellat eius, cupiditate cumque labore magnam voluptatum sequi.
+                Sequi, fugit quibusdam sapiente a quos maxime non. Esse voluptatem provident magni accusamus facere quod cumque nisi, aspernatur repudiandae autem deleniti, dolor magnam sit nemo quam ratione cupiditate ipsa modi?</p>
+            </div>
+        </section>
+    </div>
+    <div class="game">
+        <section id="the-game" class=>
+            <h2>Le Jeu</h2>
+            <p id="game-error">Impossible de jouer sur Téléphone !</p>
+            <div class="mp-game">
+                <div class="game-container">
+                    <span id="score">Score: 0</span>
+                    <div id="background-sky"></div>
+                    <div id="background-win"></div>
+                    <div id="background-dark-sky"></div>
+                    <div id="background"></div>
+                    <div id="background-cloud"></div>
+                    <div id="fox"></div>
+                    <div id="obstacle"></div>
+                    <div id="obstacle2"></div>
+                    <div id="start-message">
+                        <p></p>
+                        <p>Utiliser les touches <span><img class="icon" src="./src/img/icons/espace.png" alt="Touche espace du clavier"></span> ou <span><img class="icon" src="./src/img/icons/fleche-vers-le-haut.png" alt="Touche flèche du haut du clavier"></span> pour franchir les obstacles.</p>
+                        <button type="button" id="start-button">Commencer à jouer</button>
+                    </div>
+                    <div id="game-over-message">
+                        <p>Game Over!</p>
+                        <button type="button" id="restart-button">Restart</button>
+                    </div>
+                    <div id="win-game">
+                        <p>Congratulations! You win!</p>
+                        <button type="button" id="show-cv">Check your rewards !</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="hide-cv">
+        <h2>Pick your favorite !</h2>
+        <div class="cv-contain">
+            <a href="./src/img/cv/CV-pdf/MelodyJacquemin-Développeuse-Full-Stack-pastel.pdf" target="_blank"><img class="cv" src="./src/img/cv/MjDfPastel.png" alt="CV Pastel"></a>
+            <a href="./src/img/cv/CV-pdf/Melody-Jacquemin-Développeuse-Full-Stack-grey.pdf" target="_blank"><img class="cv" src="./src/img/cv/MjDfGrey.png" alt="CV Nuances de gris"></a>
+            <a href="./src/img/cv/CV-pdf/Melody-Jacquemin-Développeuse Full-Stack-color.pdf" target="_blank"><img class="cv" src="./src/img/cv/MjDfColor.png" alt="CV Couleur"></a>
+        </div>
+    </div>
+    <footer>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </footer>
+    <script src="./src/js/script.js"></script>
+</body>
+</html>
+
+
+<!--<main class="mp">
+    <section >
+        <div class="instructions"></div>
+    </section>
+    <section>
+        <div class="monJeu"></div>
+    </section>
+</main> -->
