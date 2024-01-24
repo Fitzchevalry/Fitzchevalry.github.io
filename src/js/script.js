@@ -15,6 +15,7 @@
     const hiddenPart = document.querySelector(".hide-cv");
     const showCvButton = document.getElementById("show-cv");
     const winGameMessage = document.getElementById("win-game");
+    const header = document.querySelector("header");
     let score = 0;
     let position = 0;
     let spritePosition = 1;
@@ -183,7 +184,8 @@
             top: 5000,
             left: 0,
             behavior: "smooth",
-          });        
+          });    
+          header.style.position = "initial";    
     };
 
     // Fonction démarrage du jeu

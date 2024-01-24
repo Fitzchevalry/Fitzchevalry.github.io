@@ -1,9 +1,21 @@
 /* CSS Responsive mobile */
 
 /* mp + header */
+.mp-container {
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
 header {
     flex-direction: column;
     padding-top: 2rem;
+}
+
+#instructions.mp {
+    justify-content:flex-start;
+    min-height: min-content;
 }
 
 .mp-logo {
@@ -43,11 +55,16 @@ header ul a{
 .game {
     padding: 3rem 1rem 3rem;
 }
+
+.game h2{
+    padding: 0 0 1rem;
+}
+
 .game-container{
     display: none;
 }
 
-#game-error {
+.game-error {
     display: block;
 }
 
