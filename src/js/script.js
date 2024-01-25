@@ -1,123 +1,217 @@
-    "use strict"
-    
-    const gameContainer = document.getElementById("game-container");
-    const fox = document.getElementById("fox");
-    const obstacle = document.getElementById("obstacle");
-    const obstacles2 = document.getElementById("obstacle2");
-    const gameOverMessage = document.getElementById("game-over-message");
-    const startMessage = document.getElementById("start-message");
-    const startButton = document.getElementById("start-button");
-    const restartButton = document.getElementById("restart-button");
-    const backgroundCloud = document.getElementById('background-cloud');
-    const backgroundDark = document.getElementById("background-dark-sky");
-    const backgroundWin = document.getElementById("background-win");
-    const scoreElement = document.getElementById("score");
-    const hiddenPart = document.querySelector(".hide-cv");
-    const showCvButton = document.getElementById("show-cv");
-    const winGameMessage = document.getElementById("win-game");
-    const header = document.querySelector("header");
-    let score = 0;
-    let position = 0;
-    let spritePosition = 1;
-    let isFrozen = false;
-    let isJumping = false;
-    let gameRunning = false;
-    let gameLoopInterval;
-    let code;
+    "use strict";
 
-   // Gestionnaire touches enfoncées
-    const keydownHandler = function(evtKeydown) {
-        code = evtKeydown.code;
-        if (code === 'Space' || code === 'ArrowUp' || code === 'KeyW') {
-            jump();
+const elements = {
+    gameContainer: document.getElementsByClassName("game-container"),
+    fox: document.getElementById("fox"),
+    roc2 : document.getElementById("roc2"),
+    roc3 : document.getElementById("roc3"),
+    gameOverMessage: document.getElementById("game-over-message"),
+    startMessage: document.getElementById("start-message"),
+    startButton: document.getElementById("start-button"),
+    restartButton: document.getElementById("restart-button"),
+    backgroundCloud: document.getElementById('background-cloud'),
+    backgroundDark: document.getElementById("background-dark-sky"),
+    backgroundWin: document.getElementById("background-win"),
+    scoreElement: document.getElementById("score"),
+    hiddenPart: document.querySelector(".hide-cv"),
+    showCvButton: document.getElementById("show-cv"),
+    winGameMessage: document.getElementById("win-game"),
+    header: document.querySelector("header")
+};
+
+const gameData = {
+    score: 0,
+    position: 0,
+    spritePosition: 1,
+    isFrozen: false,
+    isJumping: false,
+    gameRunning: false,
+    gameLoopInterval: 60,
+    code: null,
+    jumps: 0,  // Ajout de la variable pour compter les sauts
+    maxJumps: 2,  // Nombre maximum de sauts (ajustez selon vos besoins)
+    canJump: true,
+};
+
+const handlers = {
+    // keydownHandler(evtKeydown) {
+    //     gameData.code = evtKeydown.code;
+    //     if (gameData.code === 'Space' || gameData.code === 'ArrowUp' || gameData.code === 'KeyW') {
+    //         actions.jump();
+    //         evtKeydown.preventDefault();
+    //         gameData.isFrozen = true;
+    //     }
+    // },
+    keydownHandler(evtKeydown) {
+        gameData.code = evtKeydown.code;
+
+        if (gameData.canJump && (gameData.code === 'Space' || gameData.code === 'ArrowUp' || gameData.code === 'KeyW')) {
+            actions.jump();
             evtKeydown.preventDefault();
-            isFrozen = true;
+            gameData.isFrozen = true;
         }
-    };
+    },
 
-    // Gestionnaire touches relâchées
-    const keyupHandler = function(evtKeyup) {
-        code = evtKeyup.code;
-        if (code === 'Space' || code === 'ArrowUp' || code === 'KeyW') {
-            isFrozen = false;
+    keyupHandler(evtKeyup) {
+        gameData.code = evtKeyup.code;
+        if (gameData.code === 'Space' || gameData.code === 'ArrowUp' || gameData.code === 'KeyW') {
+            gameData.isFrozen = false;
         }
-    };
-    
-   // Gestionnaire focus
-    const focusHandler = function() {
-        document.addEventListener("keydown", keydownHandler);
-    };
+    },
 
-    // Gestionnaire non-focus
-    const blurHandler = function() {
-        document.removeEventListener("keydown", keydownHandler);
-    };
+    focusHandler() {
+        document.addEventListener("keydown", handlers.keydownHandler);
+    },
 
-  
-    // Fonction saut
-    const jump = function() {
-        if (gameRunning && !isJumping) {
-            isJumping = true;
+    blurHandler() {
+        document.removeEventListener("keydown", handlers.keydownHandler);
+    }
+};
+
+const actions = {
+    jump() {
+        if (gameData.gameRunning && gameData.jumps < gameData.maxJumps) {
+            gameData.isJumping = true;
             let jumpHeight = 0;
             let posFoxBottom;
-    
+
             const jumpInterval = setInterval(() => {
-                posFoxBottom = parseFloat(getComputedStyle(fox).bottom);
-    
+                posFoxBottom = parseFloat(getComputedStyle(elements.fox).bottom);
+
                 if (jumpHeight < 60) {
-                    fox.style.bottom = posFoxBottom + 15 + "px";
+                    elements.fox.style.bottom = posFoxBottom + 15 + "px";
                     jumpHeight += 5;
                 } else {
                     clearInterval(jumpInterval);
-    
+
                     const fallInterval = setInterval(() => {
-                        posFoxBottom = parseFloat(getComputedStyle(fox).bottom);
-                        fox.style.bottom = posFoxBottom - 4 + "px";
-    
+                        posFoxBottom = parseFloat(getComputedStyle(elements.fox).bottom);
+                        elements.fox.style.bottom = posFoxBottom - 10 + "px";
+
                         if (posFoxBottom <= 0) {
-                            fox.style.bottom = 0;
-                            isJumping = false;
+                            elements.fox.style.bottom = 0;
+                            gameData.isJumping = false;
+                            gameData.jumps++;  // Incrémentation du compteur de sauts
+
+                            // Réinitialisation du compteur de sauts après un certain délai
+                            setTimeout(() => {
+                                gameData.jumps = 0;
+                            }, 500);  // Ajustez le délai de réinitialisation selon vos besoins
+                            
                             clearInterval(fallInterval);
                         }
                     }, 30);
                 }
             }, 30);
         }
-    };
-    
-    // Fonction sprite
-    const updateSprite = () => {
-        if (!isFrozen) {
-            spritePosition -= 195.25;
-            fox.style.backgroundPosition = `${spritePosition}px 0`;
-        }
-    };
-    setInterval(updateSprite, 150);
+    },
+    // jump() {
+    //     if (gameData.gameRunning && !gameData.isJumping) {
+    //         gameData.isJumping = true;
+    //         let jumpHeight = 0;
+    //         let posFoxBottom;
 
-    // Fonction déplacement obstacle
-    const moveObstacle = function() {
-        if (gameRunning) {
-            const posObscLeft = parseFloat(getComputedStyle(obstacle2).left);
+    //         const jumpInterval = setInterval(() => {
+    //             posFoxBottom = parseFloat(getComputedStyle(elements.fox).bottom);
+
+    //             if (jumpHeight < 70) {
+    //                 elements.fox.style.bottom = posFoxBottom + 15 + "px";
+    //                 jumpHeight += 5;
+    //             } else {
+    //                 clearInterval(jumpInterval);
+
+    //                 const fallInterval = setInterval(() => {
+    //                     posFoxBottom = parseFloat(getComputedStyle(elements.fox).bottom);
+    //                     elements.fox.style.bottom = posFoxBottom - 10 + "px";
+
+    //                     if (posFoxBottom <= 0) {
+    //                         elements.fox.style.bottom = 0;
+    //                         gameData.isJumping = false;
+    //                         clearInterval(fallInterval);
+    //                     }
+    //                 }, 30);
+    //             }
+    //         }, 30);
+    //     }
+    // },
+
+    updateSprite(timestamp) {
+        if (!gameData.isFrozen) {
+            if (!gameData.lastSpriteUpdate) {
+                gameData.lastSpriteUpdate = timestamp;
+            }
     
-            if (posObscLeft <= -20) {
-                obstacle2.style.left = "100%";
-                if (!isFrozen) {
-                    score += 10;
-                    scoreElement.innerHTML = `Score: ${score}`;
-                    checkWinCondition();
+            const timeElapsed = timestamp - gameData.lastSpriteUpdate;
+            if (timeElapsed >= 100) { // 150 millisecondes, ajustez si nécessaire
+                gameData.spritePosition -= 195.25;
+                elements.fox.style.backgroundPosition = `${gameData.spritePosition}px 0`;
+                gameData.lastSpriteUpdate = timestamp;
+            }
+        }
+    },
+
+    // moveObstacle() {
+    //     if (gameData.gameRunning) {
+    //         const posObscLeft = parseFloat(getComputedStyle(elements.roc3).left);
+    
+    //         if (posObscLeft <= -20) {
+    //             elements.roc3.style.left = "100%";
+    //             if (!gameData.isFrozen) {
+    //                 gameData.score += 10;
+    //                 elements.scoreElement.innerHTML = `Score: ${gameData.score}`;
+    //                 actions.checkWinCondition();
+    //             }
+    //         } else {
+    //             elements.roc3.style.left = posObscLeft - 5 + "px";
+    //         }
+    //         gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
+    //     }
+    // },
+
+    // ...
+
+
+    moveObstacle() {
+        if (gameData.gameRunning) {
+            const posObscLeft3 = parseFloat(getComputedStyle(elements.roc3).left);
+            const posObscLeft2 = parseFloat(getComputedStyle(elements.roc2).left);
+    
+            if (posObscLeft3 <= -20) {
+                // Position aléatoire entre 100% et 200%
+                const randomPosition = Math.random() * 100 + 100;
+                elements.roc3.style.left = randomPosition + "%";
+                
+                if (!gameData.isFrozen) {
+                    gameData.score += 10;
+                    elements.scoreElement.innerHTML = `Score: ${gameData.score}`;
+                    actions.checkWinCondition();
                 }
             } else {
-                obstacle2.style.left = posObscLeft - 10 + "px";
+                elements.roc3.style.left = posObscLeft3 - 7 + "px";
             }
-            clearInterval(gameLoopInterval);
-            gameLoopInterval = setInterval(gameLoop, 40);
-        }
-    };
 
-    // Fonction vérification collision
-    const checkCollision = function() {
-        const foxRect = fox.getBoundingClientRect();
-        const obstacleRect = obstacle.getBoundingClientRect();
+            if (posObscLeft2 <= -20) {
+                // Position aléatoire entre 100% et 200%
+                const randomPosition = Math.random() * 50 + 200;
+                elements.roc2.style.left = randomPosition + "%";
+                
+                if (!gameData.isFrozen) {
+                    gameData.score += 10;
+                    elements.scoreElement.innerHTML = `Score: ${gameData.score}`;
+                    actions.checkWinCondition();
+                }
+            } else {
+                elements.roc2.style.left = posObscLeft2 - 7 + "px";
+            }
+        }
+            gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
+        },
+    
+
+    checkCollision() {
+        const foxRect = elements.fox.getBoundingClientRect();
+        const obstacleRect = elements.roc3.getBoundingClientRect();
+        const obstacleRect2 = elements.roc2.getBoundingClientRect();
 
         if (
             foxRect.bottom > obstacleRect.top &&
@@ -125,121 +219,134 @@
             foxRect.right > obstacleRect.left &&
             foxRect.left < obstacleRect.right
         ) {
-            handleCollision();
+            actions.handleCollision();
+            return;
         }
-    };
-    
-    // Fonction gestion collision
-    const handleCollision = function() {
-        if (gameRunning) {
-            gameRunning = false;
-            gameOverMessage.style.display = "block";
-            fox.style.display = "none";
-            obstacle.style.display = "none";
-            backgroundCloud.style.display = "none";
-            backgroundDark.style.display = "block";
-            document.removeEventListener("keydown", keydownHandler);
-            clearInterval(gameLoopInterval);
-            gameLoopInterval = setInterval(gameLoop, 40);
+
+        // Vérification de la collision avec le deuxième obstacle (roc2)
+        if (
+            foxRect.bottom > obstacleRect2.top &&
+            foxRect.top < obstacleRect2.bottom &&
+            foxRect.right > obstacleRect2.left &&
+            foxRect.left < obstacleRect2.right
+        ) {
+            actions.handleCollision();
+            return;
         }
-    };
+    },
 
-    // Fonction reset/redémarrage
-    const resetGame = function() {
-        gameRunning = false;
-        score = 0;
-        scoreElement.innerHTML= "Score: 0";
-        position = 0;
-        spritePosition = 1;
-        isFrozen = false;
-        isJumping = false;
-        gameOverMessage.style.display = "none";
-        backgroundDark.style.display = "none";
-        clearInterval(gameLoopInterval);
-        startGame();
-    };
-
-    // Fonction verification scores
-    const checkWinCondition = function() {
-        if (score >= 20 && gameRunning) {
-            // fox.style.display = "none";
-            // obstacle.style.display = "none";
-            stopGame();
-            winGameMessage.style.display = "block";
-             
-            if (showCvButton) {
-                showCvButton.addEventListener("click", showHiddenPart);
-            }        
+    handleCollision() {
+        if (gameData.gameRunning) {
+            gameData.gameRunning = false;
+            elements.gameOverMessage.style.display = "block";
+            elements.fox.style.display = "none";
+            elements.roc3.style.display = "none";
+            elements.roc2.style.display = "none";
+            elements.backgroundCloud.style.display = "none";
+            elements.backgroundDark.style.display = "block";
+            document.removeEventListener("keydown", handlers.keydownHandler);
+            cancelAnimationFrame(gameData.gameLoopInterval);
+            gameData.gameLoopInterval = gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
         }
-    };
+    },
 
-    // Fonction affichage récompense
-    const showHiddenPart = function() {
-        hiddenPart.style.display = "flex";
-        winGameMessage.style.display = "none";
-        startMessage.style.display = "block";
-        backgroundWin.style.display = "none";
-        backgroundCloud.style.display = "";
+    resetGame() {
+        gameData.gameRunning = false;
+        gameData.score = 0;
+        elements.scoreElement.innerHTML = "Score: 0";
+        gameData.position = 0;
+        gameData.spritePosition = 1;
+        gameData.isFrozen = false;
+        gameData.isJumping = false;
+        elements.gameOverMessage.style.display = "none";
+        elements.backgroundDark.style.display = "none";
+        cancelAnimationFrame(gameData.gameLoopInterval);
+        actions.startGame();
+    },
+
+    checkWinCondition() {
+        if (gameData.score >= 100 && gameData.gameRunning) {
+            actions.stopGame();
+            elements.winGameMessage.style.display = "block";
+
+            if (elements.showCvButton) {
+                elements.showCvButton.addEventListener("click", actions.showHiddenPart);
+            }
+        }
+    },
+
+    showHiddenPart() {
+        elements.hiddenPart.style.display = "flex";
+        elements.winGameMessage.style.display = "none";
+        elements.startMessage.style.display = "block";
+        elements.backgroundWin.style.display = "none";
+        elements.backgroundCloud.style.display = "";
         window.scroll({
             top: 5000,
             left: 0,
             behavior: "smooth",
-          });    
-          header.style.position = "initial";    
-    };
+        });
+        elements.header.style.position = "initial";
+    },
 
-    // Fonction démarrage du jeu
-    const startGame = function() {
-        if (!gameRunning) {
-            gameRunning = true;
-            gameLoopInterval = setInterval(gameLoop, 40);
-            startMessage.style.display = "none";
-            fox.style.display = "block";
-            obstacle2.style.display = "block";
-            backgroundCloud.style.display = "";
-            isFrozen = false;
-            isJumping = false;
-            obstacle2.style.left = "100%";
-            fox.style.bottom = "0px";
-            document.addEventListener("keydown", keydownHandler);
+    startGame() {
+        if (!gameData.gameRunning) {
+            gameData.gameRunning = true;
+            gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
+            elements.startMessage.style.display = "none";
+            elements.fox.style.display = "block";
+            elements.roc3.style.display = "block";
+            elements.roc2.style.display = "block";
+            elements.backgroundCloud.style.display = "";
+            gameData.isFrozen = false;
+            gameData.isJumping = false;
+            elements.roc3.style.left = "100%";
+            elements.roc2.style.left = "100%";
+            elements.fox.style.bottom = "0px";
+            document.addEventListener("keydown", handlers.keydownHandler);
         }
-    };
-    // Fonction arrêt du jeu 
-    const stopGame = function() {
-        gameRunning = false;
-        fox.style.display = "none";
-        obstacle2.style.display = "none";
-        backgroundCloud.style.display = "none";
-        backgroundWin.style.display = "block";
-         scoreElement.style.display = "none";
-    
+    },
+      
+
+    stopGame() {
+        gameData.gameRunning = false;
+        elements.fox.style.display = "none";
+        elements.roc3.style.display = "none";
+        elements.roc2.style.display = "none";
+        elements.backgroundCloud.style.display = "none";
+        elements.backgroundWin.style.display = "block";
+        elements.scoreElement.style.display = "none";
+    },
+
+    moveBackground() {
+        gameData.position -= 1;
+        elements.backgroundCloud.style.backgroundPosition = `${gameData.position}px 0`;
+        requestAnimationFrame(actions.moveBackground);
+    },
+
+    gameLoop() {
+        actions.moveObstacle();
+        actions.checkCollision();
+        actions.updateSprite(Date.now());
     }
+};
 
-    // Fonction du déplacement du fond
-    const moveBackground = function() {
-        position -= 1;
-        backgroundCloud.style.backgroundPosition = `${position}px 0`;
-        requestAnimationFrame(moveBackground);
-    };
-    moveBackground();
-        
-    // Fonction de boucle de jeu
-    const gameLoop = function() {
-        moveObstacle();
-        checkCollision();
-    };
-
-    // gestionnaires d'événements
-    document.addEventListener("keydown", keydownHandler);
-    document.addEventListener("keyup", keyupHandler);
-    document.addEventListener("focus", focusHandler);
-    document.addEventListener("blur", blurHandler);
+// Gestionnaires d'événements
+document.addEventListener("keydown", handlers.keydownHandler);
+document.addEventListener("keyup", handlers.keyupHandler);
+document.addEventListener("focus", handlers.focusHandler);
+document.addEventListener("blur", handlers.blurHandler);
 
 
-    // click bouton démarrage
-    startButton.addEventListener("click", startGame);
+// Click bouton démarrage
+elements.startButton.addEventListener("click", actions.startGame);
 
-    // click bouton redémarrage
-    restartButton.addEventListener("click", resetGame);
-    
-   
+// Click bouton redémarrage
+elements.restartButton.addEventListener("click", actions.resetGame);
+
+// Démarrage du déplacement du fond
+actions.moveBackground();
+// ...
+
+// Click bouton démarrage
+elements.startButton.addEventListener("click", actions.startGame);
