@@ -308,10 +308,10 @@ window.addEventListener('scroll', () => {
         const gameContainerRect = gameContainer.getBoundingClientRect();
         const headerRect = header.getBoundingClientRect();
 
-        if (gameContainerRect.top -100 <= headerRect.height +50) {
-            header.style.display = "none";
+        if (gameContainerRect.top -50 <= headerRect.height +50) {
+            header.classList.add('sticky');
         } else {
-            header.style.display = "";
+            header.classList.remove('sticky');
         }
     }
 });

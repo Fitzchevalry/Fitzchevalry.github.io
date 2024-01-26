@@ -60,7 +60,7 @@ header {
     cursor: url(/src/img/icons/paw-solidblc.png), pointer;
 }
 
-header.static {
+header.sticky {
     position: static;
     top: 0;
     background-color: rgba(56, 37, 65, 1);

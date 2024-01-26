@@ -11,7 +11,7 @@
 header {
     flex-direction: column;
     padding-top: 2rem;
-    position: inherit;
+    display: block;
 }
 
 #instructions.mp {
@@ -53,7 +53,7 @@ header ul a{
 }
 
 /* Le Jeu */
-.game {
+#the-game {
     padding: 3rem 1rem 3rem;
 }
 
