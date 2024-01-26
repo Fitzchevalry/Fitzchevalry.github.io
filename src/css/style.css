@@ -60,6 +60,13 @@ header {
     cursor: url(/src/img/icons/paw-solidblc.png), pointer;
 }
 
+header.static {
+    position: static;
+    top: 0;
+    background-color: rgba(56, 37, 65, 1);
+    z-index: 10;
+}
+
 span {
     font-family: 'Roboto', sans-serif;
 }
@@ -112,6 +119,7 @@ a span {
     align-items: center;
     min-height: 729px;
     background: url(/src/img/backgrounds/FONDRetoucheOk.png) center center/cover;
+    background-repeat: repeat;
 }
 .mp-content {
     max-width: 800px;
@@ -135,7 +143,7 @@ h2 {
 }
 
 /* Le Jeu */
-.game {
+#the-game {
     padding: 6rem 4rem;
     background: url(/src/img/backgrounds/reversefox.png) center center /cover;
 }
@@ -212,16 +220,16 @@ h2 {
 #background {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 120%;
     background: url(/src/img/backgrounds/layers/rocks_2.png) center center/cover;
-    background-repeat: no-repeat;
+    bottom: 0;
     z-index: 2;
 }
   
 #fox {
     position: absolute;
     bottom: 0;
-    left: 25%;
+    left: 10%;
     width: 195.25px;
     height: 77px;
     background: url(/src/img/fox/foxRun.png);

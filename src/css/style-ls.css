@@ -1,12 +1,20 @@
-body {
-    background: rgba(136, 214, 231, 1);
+
+
+#instructions {
+ 
 }
 
 .mp-container {
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: rgba(136, 214, 231, 1);
+    background: linear-gradient(white,rgb(150, 229, 252), rgb(155, 251, 255)) ;
+    /* background: url(/src/img/backgrounds/FONDRetoucheOk.png);
+    background-position: 0;
+    background-size: 79%; */
+    
 }
 
 .mp{
@@ -14,17 +22,22 @@ body {
     background-repeat: no-repeat;
 }
 
-.game {
+#the-game {
     display: flex;
     min-height: 729px;
     flex-direction: column;
     justify-content: center;
     background-size: 80%;
     background-repeat: no-repeat;
+    
+}
+.game {
+    background: linear-gradient(rgb(155, 251, 255),rgb(150, 229, 252), white ) ;
 }
 
 .hide-cv {
     min-height: 729px;
     background-size: 80%;
     background-repeat: no-repeat;
+    background-position-y: center;
 }
