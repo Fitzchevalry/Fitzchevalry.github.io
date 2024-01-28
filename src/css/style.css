@@ -122,7 +122,7 @@ a span {
     background-repeat: repeat;
 }
 .mp-content {
-    max-width: 800px;
+    max-width: 700px;
     text-align: center;
     color : rgba(56, 37, 65, 1);
     /* border: 0.5rem solid rgba(56, 37, 65, 1); */
@@ -131,15 +131,22 @@ a span {
 }
 h2 {
     font-size: 2.8rem;
+    padding-bottom: 1rem;
     color : rgba(56, 37, 65, 1);
     text-align: center;
+    margin: 0;
 }
 
 .mp-content p {
-    font-size: 1.4rem;
-    font-weight: 300;
+    font-size: 1rem;
+    font-weight: light;
     letter-spacing: 1px;
     line-height: 1.5rem;
+}
+
+.mp-content :nth-child(5) {
+    font-style: italic;
+    font-size: 0.7rem;
 }
 
 /* Le Jeu */

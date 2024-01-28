@@ -17,7 +17,10 @@ const elements = {
     hiddenPart: document.querySelector(".hide-cv"),
     showCvButton: document.getElementById("show-cv"),
     winGameMessage: document.getElementById("win-game"),
-    header: document.querySelector("header")
+    header: document.querySelector("header"),
+    jumpSound : document.getElementById("jumpSound"),
+    victorySound :document.getElementById("victorySound"),
+    defeatSound : document.getElementById("defeatSound"),
 };
 
 const gameData = {
@@ -66,6 +69,7 @@ const actions = {
             gameData.isJumping = true;
             let jumpHeight = 0;
             let posFoxBottom;
+            jumpSound.play();
     
             const jumpInterval = setInterval(() => {
                 posFoxBottom = parseFloat(getComputedStyle(elements.fox).bottom);
@@ -113,38 +117,38 @@ const actions = {
         if (gameData.gameRunning) {
             const posObscLeft3 = parseFloat(getComputedStyle(elements.roc3).left);
             const posObscLeft2 = parseFloat(getComputedStyle(elements.roc2).left);
-    
-            if (posObscLeft3 <= -20) {
-                // Position aléatoire entre 100% et 200%
-                const randomPosition = Math.random() * 100 + 100;
-                elements.roc3.style.left = randomPosition + "%";
-                
-                if (!gameData.isFrozen) {
-                    gameData.score += 5;
-                    elements.scoreElement.innerHTML = `Score: ${gameData.score}`;
-                    actions.checkWinCondition();
-                }
-            } else {
-                elements.roc3.style.left = posObscLeft3 - 7 + "px";
-            }
 
-            if (posObscLeft2 <= -20) {
-                // Position aléatoire entre 100% et 200%
-                const randomPosition = Math.random() * 50 + 200;
-                elements.roc2.style.left = randomPosition + "%";
-                
-                if (!gameData.isFrozen) {
-                    gameData.score += 5;
-                    elements.scoreElement.innerHTML = `Score: ${gameData.score}`;
-                    actions.checkWinCondition();
+            const moveObstacleLeft = (element, offset, scoreIncrement) => {
+                const posLeft = parseFloat(getComputedStyle(element).left);
+                if (posLeft <= -20) {
+                    let minGap = 150; // Écart minimal entre deux obstacles
+
+                    // Générer une nouvelle position avec un écart minimal
+                    let randomPosition = Math.random() * offset + minGap;
+                    while (randomPosition - posLeft < minGap) {
+                        randomPosition = Math.random() * offset + minGap;
+                    }
+
+                    element.style.left = `${randomPosition}%`;
+
+                    if (!gameData.isFrozen) {
+                        gameData.score += scoreIncrement;
+                        elements.scoreElement.innerHTML = `Score: ${gameData.score}`;
+                        actions.checkWinCondition();
+                    }
+                } else {
+                    element.style.left = posLeft - 7 + "px";
                 }
-            } else {
-                elements.roc2.style.left = posObscLeft2 - 7 + "px";
-            }
+            };
+
+            const obstacleScoreIncrement = 10;
+
+            moveObstacleLeft(elements.roc3, 100, obstacleScoreIncrement);
+            moveObstacleLeft(elements.roc2, 150, obstacleScoreIncrement);
         }
-            gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
-     },
-    
+
+        gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
+    },
 
     checkCollision() {
         const foxRect = elements.fox.getBoundingClientRect();
@@ -186,6 +190,7 @@ const actions = {
             document.removeEventListener("keydown", handlers.keydownHandler);
             cancelAnimationFrame(gameData.gameLoopInterval);
             gameData.gameLoopInterval = gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
+            defeatSound.play();
         }
         },
 
@@ -204,9 +209,10 @@ const actions = {
     },
 
     checkWinCondition() {
-        if (gameData.score >= 30 && gameData.gameRunning) {
+        if (gameData.score >= 100 && gameData.gameRunning) {
             actions.stopGame();
             elements.winGameMessage.style.display = "block";
+            victorySound.play();
 
             if (elements.showCvButton) {
                 elements.showCvButton.addEventListener("click", actions.showHiddenPart);
@@ -315,24 +321,3 @@ window.addEventListener('scroll', () => {
         }
     }
 });
-
-
-
-
-    // moveObstacle() {
-    //     if (gameData.gameRunning) {
-    //         const posObscLeft = parseFloat(getComputedStyle(elements.roc3).left);
-    
-    //         if (posObscLeft <= -20) {
-    //             elements.roc3.style.left = "100%";
-    //             if (!gameData.isFrozen) {
-    //                 gameData.score += 10;
-    //                 elements.scoreElement.innerHTML = `Score: ${gameData.score}`;
-    //                 actions.checkWinCondition();
-    //             }
-    //         } else {
-    //             elements.roc3.style.left = posObscLeft - 5 + "px";
-    //         }
-    //         gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
-    //     }
-    // },
