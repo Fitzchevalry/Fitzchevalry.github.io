@@ -1,5 +1,6 @@
 "use strict";
 
+// Elements, récupération des références HTML
 const elements = {
     gameContainer: document.querySelector(".game-container"),
     fox: document.getElementById("fox"),
@@ -23,6 +24,8 @@ const elements = {
     ambiantSound: document.getElementById("ambiantSound"),
 };
 
+
+// Game Data, état des paramètres du jeu
 const gameData = {
     score: 0,
     position: 0,
@@ -35,6 +38,8 @@ const gameData = {
     code: null,
 };
 
+
+// Handlers, événements des touches de claviers (up and down) et du focus.
 const handlers = {
     keydownHandler(evtKeydown) {
         gameData.code = evtKeydown.code;
@@ -62,6 +67,17 @@ const handlers = {
     },
 };
 
+
+/*Actions :
+- Saut(jump), 
+- Déplacements obstacles (moveObstacle, resetObstacle, updateObstaclePosition),
+- Collisions (checkCollision, handleCollision),
+- Condition de gain (checkWinCondition),
+- Partie cachée (showHiddenPart)
+- Actions démarrage/arrêt (reset, start, stop),
+- Déplacement images (moveBackground, updateSprite)
+- Boucle de jeu (gameLoop);
+ */ 
 const actions = {
     jump() {
         if (gameData.gameRunning && !gameData.isJumping) {
@@ -276,6 +292,9 @@ const actions = {
         actions.updateSprite(Date.now());
     },
 };
+
+
+// Main, interactions avec le DOM
 
 // Gestionnaires d'événements
 document.addEventListener("keydown", handlers.keydownHandler);

@@ -7,7 +7,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(white,rgb(150, 229, 252), rgb(155, 251, 255)) ;    
+    background: linear-gradient(white,rgb(150, 229, 252), rgb(155, 251, 255));    
 }
 
 .mp{
@@ -23,13 +23,17 @@
     justify-content: center;
     background-size: 80%;
     background-repeat: no-repeat;
-    
 }
+
 .game {
     background: linear-gradient(rgb(155, 251, 255),rgb(150, 229, 252), white ) ;
 }
 
 /* Reveal CV */
+.backHide {
+    background: linear-gradient(white,rgb(150, 229, 252), rgb(155, 251, 255)) ;
+}
+
 .hide-cv {
     min-height: 729px;
     background-size: 80%;

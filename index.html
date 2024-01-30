@@ -1,100 +1,96 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/css/style.css">
-    <link rel="stylesheet" media="(max-width: 576px)" href="./src/css/style-mobile.css">
-    <link rel="stylesheet" media="(min-width:1620px)" href="./src/css/style-ls.css">
-    
-    <link rel="icon" href="./src/img/icons/gamepad-solid.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Monoton&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/8c68d49fdd.js" crossorigin="anonymous"></script>
-    <title>Melody Jacquemin - Développeuse FullStack</title>
-</head>
-<body>
-    <div class="mp-container">
-        <header>
-            <h1 class="mp-logo">
-                <i class="fa-solid fa-gamepad"></i>
-                <a href="#">MJ - <span>Kitsune game CV</span></a>
-            </h1>
-            <ul>
-                <li><a href="#presentation">Présentation</a></li>
-                <li><a href="#the-game">Jeu</a></li>
-                <li><a href="./src/img/cv/CV-pdf/MelodyJacquemin-Développeuse-Full-Stack-pastel.pdf" target="_blank">Cheat</a></li>
-            </ul>
-        </header>
-        <section id="presentation" class="mp">
-            <div class="mp-content">
-                <h2>Présentation</h2>
-                <p>Bonjour et bienvenue sur ma toute première création ! <br>C'est avec une immense joie que je partage avec vous le résultat de ces deux premiers mois d'apprentissage intensif dans mon parcours pour devenir développeuse FullStack. </p>
-                <p><strong>Le principe ?</strong> <br> Accéder à mon CV de manière ludique en obtenant un score de 100pts.</p> 
-                <p><strong>Au plaisir d'échanger avec vous dans un futur proche. </strong></p>
-                <p>Si le temps vous manque, vous trouverez dans la barre de navigation un raccourci direct. </p>
-            </div>
-        </section>
-    </div>
-    <div class="game">
-        <section id="the-game" class=>
-            <h2>Le Jeu</h2>
-            <div class="game-error">
-                <p>SORRY</p>
-                <p>Impossible de jouer sur Téléphone !</p>
-            </div>
-            <div class="mp-game">
-                <div class="game-container">
-                    <span id="score">Score: 0</span>
-                    <div id="background-sky"></div>
-                    <div id="background-win"></div>
-                    <div id="background-dark-sky"></div>
-                    <div id="background"></div>
-                    <div id="background-cloud"></div>
-                    <div id="fox"></div>
-                    <div id="obstacles"></div>
-                    <audio id="jumpSound" src="/src/sounds/Jump.wav" preload="auto"></audio>
-                    <audio id="victorySound" src="/src/sounds/Victory.mp3" preload="auto"></audio>
-                    <audio id="defeatSound" src="/src/sounds/Death.mp3" preload="auto"></audio>
-                    <audio id="ambiantSound" src="/src/sounds/Night Ambient 5 (Loop).mp3" preload="auto"></audio>
-                    <div id="start-message">
-                        <p></p>
-                        <p>Utiliser les touches <span><img class="icon" src="./src/img/icons/espace.png" alt="Touche espace du clavier"></span> ou <span><img class="icon" src="./src/img/icons/fleche-vers-le-haut.png" alt="Touche flèche du haut du clavier"></span> pour franchir les obstacles.</p>
-                        <button type="button" id="start-button">Commencer à jouer</button>
-                    </div>
-                    <div id="game-over-message">
-                        <p>Game Over!</p>
-                        <button type="button" id="restart-button">Restart</button>
-                    </div>
-                    <div id="win-game">
-                        <p>Congratulations! You win!</p>
-                        <button type="button" id="show-cv">Check your rewards !</button>
-                    </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./src/css/style.css">
+        <link rel="stylesheet" media="(max-width: 576px)" href="./src/css/style-mobile.css">
+        <link rel="stylesheet" media="(min-width:1620px)" href="./src/css/style-ls.css">
+        
+        <link rel="icon" href="./src/img/icons/gamepad-solid.svg">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Monoton&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/8c68d49fdd.js" crossorigin="anonymous"></script>
+        <title>Melody Jacquemin - Développeuse FullStack</title>
+    </head>
+    <body>
+        <div class="mp-container">
+            <header>
+                <h1 class="mp-logo">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <a href="#">MJ - <span>Kitsune game CV</span></a>
+                </h1>
+                <ul>
+                    <li><a href="#presentation">Présentation</a></li>
+                    <li><a href="#the-game">Jeu</a></li>
+                    <li><a href="./src/img/cv/CV-pdf/MelodyJacquemin-Développeuse-Full-Stack-pastel.pdf" target="_blank">Cheat</a></li>
+                </ul>
+            </header>
+            <section id="presentation" class="mp">
+                <div class="mp-content">
+                    <h2>Présentation</h2>
+                    <p>Bonjour et bienvenue sur ma toute première création ! <br>C'est avec une immense joie que je partage avec vous le résultat de ces deux premiers mois d'apprentissage intensif dans mon parcours pour devenir développeuse FullStack. </p>
+                    <p><strong>Le principe ?</strong> <br> Accéder à mon CV de manière ludique en obtenant un score de 100pts.</p> 
+                    <p><strong>Au plaisir d'échanger avec vous dans un futur proche. </strong></p>
+                    <p>Si le temps vous manque, vous trouverez dans la barre de navigation un raccourci direct. </p>
+                </div>
+            </section>
+        </div>
+        <div class="game">
+            <section id="the-game" class=>
+                <h2>Le Jeu</h2>
+                <div class="game-error">
+                    <p>SORRY</p>
+                    <p>Impossible de jouer sur Téléphone !</p>
+                </div>
+                <div class="mp-game">
+                    <div class="game-container">
+                        <span id="score">Score: 0</span>
+                        <div id="background-sky"></div>
+                        <div id="background-win"></div>
+                        <div id="background-dark-sky"></div>
+                        <div id="background"></div>
+                        <div id="background-cloud"></div>
+                        <div id="fox"></div>
+                        <div id="obstacles"></div>
+                        <audio id="jumpSound" src="/src/sounds/Jump.wav" preload="auto"></audio>
+                        <audio id="victorySound" src="/src/sounds/Victory.mp3" preload="auto"></audio>
+                        <audio id="defeatSound" src="/src/sounds/Death.mp3" preload="auto"></audio>
+                        <audio id="ambiantSound" src="/src/sounds/Night Ambient 5 (Loop).mp3" preload="auto"></audio>
+                        <div id="start-message">
+                            <p></p>
+                            <p>Utiliser les touches <span><img class="icon" src="./src/img/icons/espace.png" alt="Touche espace du clavier"></span> ou <span><img class="icon" src="./src/img/icons/fleche-vers-le-haut.png" alt="Touche flèche du haut du clavier"></span> pour franchir les obstacles.</p>
+                            <button type="button" id="start-button">Commencer à jouer</button>
+                        </div>
+                        <div id="game-over-message">
+                            <p>Game Over!</p>
+                            <button type="button" id="restart-button">Restart</button>
+                        </div>
+                        <div id="win-game">
+                            <p>Congratulations! You win!</p>
+                            <button type="button" id="show-cv">Check your rewards !</button>
+                        </div>
 
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="backHide">
+            <div class="hide-cv">
+                <h2>Pick your favorite !</h2>
+                <div class="cv-contain">
+                    <a href="./src/img/cv/CV-pdf/MelodyJacquemin-Développeuse-Full-Stack-pastel.pdf" target="_blank"><img class="cv" src="./src/img/cv/pastel.png" alt="CV Pastel"></a>
+                    <a href="./src/img/cv/CV-pdf/Melody-Jacquemin-Développeuse-Full-Stack-grey.pdf" target="_blank"><img class="cv" src="./src/img/cv/grey.png" alt="CV Nuances de gris"></a>
+                    <a href="./src/img/cv/CV-pdf/Melody-Jacquemin-Développeuse Full-Stack-color.pdf" target="_blank"><img class="cv" src="./src/img/cv/color.png" alt="CV Couleur"></a>
                 </div>
             </div>
-        </section>
-    </div>
-    <div class="hide-cv">
-        <h2>Pick your favorite !</h2>
-        <div class="cv-contain">
-            <a href="./src/img/cv/CV-pdf/MelodyJacquemin-Développeuse-Full-Stack-pastel.pdf" target="_blank"><img class="cv" src="./src/img/cv/pastel.png" alt="CV Pastel"></a>
-            <a href="./src/img/cv/CV-pdf/Melody-Jacquemin-Développeuse-Full-Stack-grey.pdf" target="_blank"><img class="cv" src="./src/img/cv/grey.png" alt="CV Nuances de gris"></a>
-            <a href="./src/img/cv/CV-pdf/Melody-Jacquemin-Développeuse Full-Stack-color.pdf" target="_blank"><img class="cv" src="./src/img/cv/color.png" alt="CV Couleur"></a>
+            <footer>
+                <p>©MelodyJacquemin - 2024</p>
         </div>
-    </div>
-    <footer>
-        <p>©MelodyJacquemin - 2024</p>
-    </footer>
-    <!-- <script src="./src/js/script.js"></script> -->
-    <script type="module" src="./src/js/modules/elements.js"></script>
-    <script type="module" src="./src/js/modules/actions.js"></script>
-    <script type="module" src="./src/js/modules/gameData.js"></script>
-    <script type="module" src="./src/js/modules/handlers.js"></script>
-    <script type="module" src="./src/js/main.js"></script>
-
-</body>
+        </footer>
+        <script src="./src/js/script.js"></script>
+    </body>
 </html>
