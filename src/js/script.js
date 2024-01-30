@@ -1,5 +1,8 @@
 "use strict";
+window.addEventListener("DOMContentLoaded", function(){
+    
 
+    
 // Elements, récupération des références HTML
 const elements = {
     gameContainer: document.querySelector(".game-container"),
@@ -116,7 +119,7 @@ const actions = {
             let speedMultiplier = 1;
 
             if (gameData.score >= 60) {
-                speedMultiplier = 2;
+                speedMultiplier = 1.75;
             } else if (gameData.score >= 30) {
                 speedMultiplier = 1.25;
             }
@@ -131,7 +134,7 @@ const actions = {
                 }
             };
 
-            moveObstacleLeft(elements.obstacle, 150);
+            moveObstacleLeft(elements.obstacle, 125);
         }
 
         gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
@@ -317,6 +320,10 @@ window.addEventListener("scroll", () => {
         const gameContainerRect = gameContainer.getBoundingClientRect();
         const headerRect = header.getBoundingClientRect();
 
-        header.classList.toggle("sticky", gameContainerRect.top - 50 <= headerRect.height + 50);
+        header.classList.toggle("sticky", gameContainerRect.top <= headerRect.height);
     }
 });
+
+});
+
+

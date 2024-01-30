@@ -1,13 +1,17 @@
 /* CSS Large Screen */
 
 /* Main Page */
+header {
+    padding: 0.5rem 15rem 0.5rem 15rem;
+}
+
 .mp-container {
     margin: 0;
     padding: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(white,rgb(150, 229, 252), rgb(155, 251, 255));    
+    background: linear-gradient(rgba(56, 37, 65, 1), rgba(56, 37, 65, 1), rgb(104, 69, 121));
 }
 
 .mp{
@@ -26,12 +30,12 @@
 }
 
 .game {
-    background: linear-gradient(rgb(155, 251, 255),rgb(150, 229, 252), white ) ;
+    background: linear-gradient(rgb(104, 69, 121), rgba(56, 37, 65, 1), rgba(56, 37, 65, 1));
 }
 
 /* Reveal CV */
 .backHide {
-    background: linear-gradient(white,rgb(150, 229, 252), rgb(155, 251, 255)) ;
+    background: linear-gradient(rgba(56, 37, 65, 1), rgb(104, 69, 121), rgba(56, 37, 65, 1), rgba(56, 37, 65, 1));
 }
 
 .hide-cv {
