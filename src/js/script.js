@@ -1,16 +1,15 @@
-    "use strict";
+"use strict";
 
 const elements = {
-    gameContainer: document.getElementsByClassName("game-container"),
+    gameContainer: document.querySelector(".game-container"),
     fox: document.getElementById("fox"),
-    roc2 : document.getElementById("roc2"),
-    roc3 : document.getElementById("roc3"),
+    obstacle: document.getElementById("obstacles"),
     gameOverMessage: document.getElementById("game-over-message"),
     startMessage: document.getElementById("start-message"),
     startButton: document.getElementById("start-button"),
     restartButton: document.getElementById("restart-button"),
-    background : document.getElementById("background"),
-    backgroundCloud: document.getElementById('background-cloud'),
+    background: document.getElementById("background"),
+    backgroundCloud: document.getElementById("background-cloud"),
     backgroundDark: document.getElementById("background-dark-sky"),
     backgroundWin: document.getElementById("background-win"),
     scoreElement: document.getElementById("score"),
@@ -18,29 +17,29 @@ const elements = {
     showCvButton: document.getElementById("show-cv"),
     winGameMessage: document.getElementById("win-game"),
     header: document.querySelector("header"),
-    jumpSound : document.getElementById("jumpSound"),
-    victorySound :document.getElementById("victorySound"),
-    defeatSound : document.getElementById("defeatSound"),
+    jumpSound: document.getElementById("jumpSound"),
+    victorySound: document.getElementById("victorySound"),
+    defeatSound: document.getElementById("defeatSound"),
+    ambiantSound: document.getElementById("ambiantSound"),
 };
 
 const gameData = {
     score: 0,
     position: 0,
-    cloudPosition : 0,
+    cloudPosition: 0,
     spritePosition: 1,
     isFrozen: false,
     isJumping: false,
     gameRunning: false,
     gameLoopInterval: 60,
     code: null,
-   
 };
 
 const handlers = {
     keydownHandler(evtKeydown) {
         gameData.code = evtKeydown.code;
 
-        if (gameData.code === 'Space' || gameData.code === 'ArrowUp' || gameData.code === 'KeyW') {
+        if (["Space", "ArrowUp", "KeyW"].includes(gameData.code)) {
             actions.jump();
             evtKeydown.preventDefault();
             gameData.isFrozen = true;
@@ -49,7 +48,7 @@ const handlers = {
 
     keyupHandler(evtKeyup) {
         gameData.code = evtKeyup.code;
-        if (gameData.code === 'Space' || gameData.code === 'ArrowUp' || gameData.code === 'KeyW') {
+        if (["Space", "ArrowUp", "KeyW"].includes(gameData.code)) {
             gameData.isFrozen = false;
         }
     },
@@ -60,32 +59,32 @@ const handlers = {
 
     blurHandler() {
         document.removeEventListener("keydown", handlers.keydownHandler);
-    }
+    },
 };
 
 const actions = {
     jump() {
         if (gameData.gameRunning && !gameData.isJumping) {
             gameData.isJumping = true;
+            jumpSound.play();
             let jumpHeight = 0;
             let posFoxBottom;
-            jumpSound.play();
-    
+            
             const jumpInterval = setInterval(() => {
                 posFoxBottom = parseFloat(getComputedStyle(elements.fox).bottom);
-    
-                if (jumpHeight < 60) {
-                    elements.fox.style.bottom = posFoxBottom + 15 + "px";
+
+                if (jumpHeight < 70) {
+                    elements.fox.style.bottom = `${posFoxBottom + 15}px`;
                     jumpHeight += 5;
                 } else {
                     clearInterval(jumpInterval);
-    
+
                     const fallInterval = setInterval(() => {
                         posFoxBottom = parseFloat(getComputedStyle(elements.fox).bottom);
-                        elements.fox.style.bottom = posFoxBottom - 10 + "px";
-    
+                        elements.fox.style.bottom = `${posFoxBottom - 10}px`;
+
                         if (posFoxBottom <= 0) {
-                            elements.fox.style.bottom = 0;
+                            elements.fox.style.bottom = "0";
                             gameData.isJumping = false;
                             clearInterval(fallInterval);
                         }
@@ -95,67 +94,60 @@ const actions = {
         }
     },
     
-    
-    
-    updateSprite(timestamp) {
-        if (!gameData.isFrozen) {
-            if (!gameData.lastSpriteUpdate) {
-                gameData.lastSpriteUpdate = timestamp;
-            }
-    
-            const timeElapsed = timestamp - gameData.lastSpriteUpdate;
-            if (timeElapsed >= 100) { // 150 millisecondes, ajustez si nécessaire
-                gameData.spritePosition -= 195.25;
-                elements.fox.style.backgroundPosition = `${gameData.spritePosition}px 0`;
-                gameData.lastSpriteUpdate = timestamp;
-            }
-        }
-    },
-
-
     moveObstacle() {
         if (gameData.gameRunning) {
-            const posObscLeft3 = parseFloat(getComputedStyle(elements.roc3).left);
-            const posObscLeft2 = parseFloat(getComputedStyle(elements.roc2).left);
+            const posObscLeft2 = parseFloat(getComputedStyle(elements.obstacle).left);
+            let speedMultiplier = 1;
 
-            const moveObstacleLeft = (element, offset, scoreIncrement) => {
-                const posLeft = parseFloat(getComputedStyle(element).left);
-                if (posLeft <= -20) {
-                    let minGap = 150; // Écart minimal entre deux obstacles
+            if (gameData.score >= 60) {
+                speedMultiplier = 2;
+            } else if (gameData.score >= 30) {
+                speedMultiplier = 1.25;
+            }
 
-                    // Générer une nouvelle position avec un écart minimal
-                    let randomPosition = Math.random() * offset + minGap;
-                    while (randomPosition - posLeft < minGap) {
-                        randomPosition = Math.random() * offset + minGap;
-                    }
+            const moveObstacleLeft = (element, offset) => {
+                const posObstacleLeft = parseFloat(getComputedStyle(element).left);
 
-                    element.style.left = `${randomPosition}%`;
-
-                    if (!gameData.isFrozen) {
-                        gameData.score += scoreIncrement;
-                        elements.scoreElement.innerHTML = `Score: ${gameData.score}`;
-                        actions.checkWinCondition();
-                    }
+                if (posObstacleLeft <= -20) {
+                    actions.resetObstacle(element, offset);
                 } else {
-                    element.style.left = posLeft - 7 + "px";
+                    actions.updateObstaclePosition(element, posObstacleLeft, speedMultiplier);
                 }
             };
 
-            const obstacleScoreIncrement = 10;
-
-            moveObstacleLeft(elements.roc3, 100, obstacleScoreIncrement);
-            moveObstacleLeft(elements.roc2, 150, obstacleScoreIncrement);
+            moveObstacleLeft(elements.obstacle, 150);
         }
 
         gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
     },
 
+    resetObstacle(element, offset) {
+        let minGap = 100;
+        let randomPosition = Math.random() * offset + minGap;
+
+        element.style.left = `${randomPosition}%`;
+
+        let randomRow = Math.floor(Math.random() * 3);
+        let randomColumn = Math.floor(Math.random() * 3);
+        let spriteWidth = 124;
+        let spriteHeight = 110;
+        element.style.backgroundPosition = `-${spriteWidth * randomColumn}px -${spriteHeight * randomRow}px`;
+
+        if (!gameData.isFrozen) {
+            gameData.score += 10;
+            elements.scoreElement.innerHTML = `Score: ${gameData.score}`;
+            actions.checkWinCondition();
+        }
+    },
+
+    updateObstaclePosition(element, posObstacleLeft, speedMultiplier) {
+        element.style.left = `${posObstacleLeft - 7 * speedMultiplier}px`;
+    },
+
     checkCollision() {
         const foxRect = elements.fox.getBoundingClientRect();
-        const obstacleRect = elements.roc3.getBoundingClientRect();
-        const obstacleRect2 = elements.roc2.getBoundingClientRect();
-        
-        // Vérification de la collision avec le deuxième obstacle (roc1)
+        const obstacleRect = elements.obstacle.getBoundingClientRect();
+
         if (
             foxRect.bottom > obstacleRect.top + 10 &&
             foxRect.top < obstacleRect.bottom - 10 &&
@@ -165,54 +157,29 @@ const actions = {
             actions.handleCollision();
             return;
         }
-    
-        // Vérification de la collision avec le deuxième obstacle (roc2)
-        if (
-            foxRect.bottom > obstacleRect2.top + 10 && 
-            foxRect.top < obstacleRect2.bottom - 10 && 
-            foxRect.right > obstacleRect2.left + 10 && 
-            foxRect.left < obstacleRect2.right - 10 
-        ) {
-            actions.handleCollision();
-            return;
-        }
     },
-        
+
     handleCollision() {
         if (gameData.gameRunning) {
             gameData.gameRunning = false;
             elements.gameOverMessage.style.display = "block";
             elements.fox.style.display = "none";
-            elements.roc3.style.display = "none";
-            elements.roc2.style.display = "none";
+            elements.obstacle.style.display = "none";
             elements.backgroundCloud.style.display = "none";
             elements.backgroundDark.style.display = "block";
             document.removeEventListener("keydown", handlers.keydownHandler);
+            elements.ambiantSound.pause();
             cancelAnimationFrame(gameData.gameLoopInterval);
-            gameData.gameLoopInterval = gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
-            defeatSound.play();
+            elements.defeatSound.play();
         }
-        },
-
-    resetGame() {
-        gameData.gameRunning = false;
-        gameData.score = 0;
-        elements.scoreElement.innerHTML = "Score: 0";
-        gameData.position = 0;
-        gameData.spritePosition = 1;
-        gameData.isFrozen = false;
-        gameData.isJumping = false;
-        elements.gameOverMessage.style.display = "none";
-        elements.backgroundDark.style.display = "none";
-        cancelAnimationFrame(gameData.gameLoopInterval);
-        actions.startGame();
     },
 
     checkWinCondition() {
         if (gameData.score >= 100 && gameData.gameRunning) {
             actions.stopGame();
             elements.winGameMessage.style.display = "block";
-            victorySound.play();
+            elements.ambiantSound.pause();
+            elements.victorySound.play();
 
             if (elements.showCvButton) {
                 elements.showCvButton.addEventListener("click", actions.showHiddenPart);
@@ -239,31 +206,43 @@ const actions = {
         cancelAnimationFrame(gameData.gameLoopInterval);
     },
 
+    resetGame() {
+        gameData.gameRunning = false;
+        gameData.score = 0;
+        elements.scoreElement.innerHTML = "Score: 0";
+        gameData.position = 0;
+        gameData.spritePosition = 1;
+        gameData.isFrozen = false;
+        gameData.isJumping = false;
+        elements.gameOverMessage.style.display = "none";
+        elements.backgroundDark.style.display = "none";
+        elements.ambiantSound.load();
+        cancelAnimationFrame(gameData.gameLoopInterval);
+        actions.startGame();
+    },
+
     startGame() {
         if (!gameData.gameRunning) {
             gameData.gameRunning = true;
             gameData.gameLoopInterval = requestAnimationFrame(actions.gameLoop);
-            elements.startMessage.style.display = "none";
-            elements.fox.style.display = "block";
-            elements.roc3.style.display = "block";
-            elements.roc2.style.display = "block";
-            elements.backgroundCloud.style.display = "";
             gameData.isFrozen = false;
             gameData.isJumping = false;
-            elements.roc3.style.left = "100%";
-            elements.roc2.style.left = "100%";
+            elements.startMessage.style.display = "none";
+            elements.fox.style.display = "block";
+            elements.obstacle.style.display = "block";
+            elements.backgroundCloud.style.display = "";
+            elements.obstacle.style.left = "100%";
             elements.fox.style.bottom = "0px";
+            elements.ambiantSound.play();
             actions.moveBackground();
             document.addEventListener("keydown", handlers.keydownHandler);
         }
     },
-      
 
     stopGame() {
         gameData.gameRunning = false;
         elements.fox.style.display = "none";
-        elements.roc3.style.display = "none";
-        elements.roc2.style.display = "none";
+        elements.obstacle.style.display = "none";
         elements.backgroundCloud.style.display = "none";
         elements.backgroundWin.style.display = "block";
         elements.scoreElement.style.display = "none";
@@ -283,11 +262,19 @@ const actions = {
         }
     },
 
+    updateSprite() {
+        if (!gameData.isFrozen && (!gameData.lastSpriteUpdate || Date.now() - gameData.lastSpriteUpdate >= 100)) {
+            gameData.spritePosition -= 195.25;
+            elements.fox.style.backgroundPosition = `${gameData.spritePosition}px 0`;
+            gameData.lastSpriteUpdate = Date.now();
+        }
+    },
+
     gameLoop() {
         actions.moveObstacle();
         actions.checkCollision();
         actions.updateSprite(Date.now());
-    }
+    },
 };
 
 // Gestionnaires d'événements
@@ -297,27 +284,20 @@ document.addEventListener("focus", handlers.focusHandler);
 document.addEventListener("blur", handlers.blurHandler);
 
 // Click bouton démarrage
-elements.startButton.addEventListener("click", () => {  
-    actions.startGame();   
-});
+elements.startButton.addEventListener("click", actions.startGame);
 
 // Click bouton redémarrage
 elements.restartButton.addEventListener("click", actions.resetGame);
 
-
-// Css 
-window.addEventListener('scroll', () => {
-    const gameContainer = document.querySelector('.game-container');
-    const header = document.querySelector('header');
+// Css
+window.addEventListener("scroll", () => {
+    const gameContainer = document.querySelector(".game-container");
+    const header = document.querySelector("header");
 
     if (gameContainer) {
         const gameContainerRect = gameContainer.getBoundingClientRect();
         const headerRect = header.getBoundingClientRect();
 
-        if (gameContainerRect.top -50 <= headerRect.height +50) {
-            header.classList.add('sticky');
-        } else {
-            header.classList.remove('sticky');
-        }
+        header.classList.toggle("sticky", gameContainerRect.top - 50 <= headerRect.height + 50);
     }
 });

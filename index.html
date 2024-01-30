@@ -25,16 +25,16 @@
                 <a href="#">MJ - <span>Kitsune game CV</span></a>
             </h1>
             <ul>
-                <li><a href="#instructions">Instructions</a></li>
+                <li><a href="#presentation">Présentation</a></li>
                 <li><a href="#the-game">Jeu</a></li>
                 <li><a href="./src/img/cv/CV-pdf/MelodyJacquemin-Développeuse-Full-Stack-pastel.pdf" target="_blank">Cheat</a></li>
             </ul>
         </header>
-        <section id="instructions" class="mp">
+        <section id="presentation" class="mp">
             <div class="mp-content">
                 <h2>Présentation</h2>
                 <p>Bonjour et bienvenue sur ma toute première création ! <br>C'est avec une immense joie que je partage avec vous le résultat de ces deux premiers mois d'apprentissage intensif dans mon parcours pour devenir développeuse FullStack. </p>
-                <p><strong>Le principe ?</strong> Accéder à mon CV de manière ludique, via un jeu de type T-rex game.</p> 
+                <p><strong>Le principe ?</strong> <br> Accéder à mon CV de manière ludique en obtenant un score de 100pts.</p> 
                 <p><strong>Au plaisir d'échanger avec vous dans un futur proche. </strong></p>
                 <p>Si le temps vous manque, vous trouverez dans la barre de navigation un raccourci direct. </p>
             </div>
@@ -56,12 +56,11 @@
                     <div id="background"></div>
                     <div id="background-cloud"></div>
                     <div id="fox"></div>
-                    <div id="roc1"></div>
-                    <div id="roc2"></div>
-                    <div id="roc3"></div>
-                    <audio id="jumpSound" src="/src/sounds/Jump.wav"></audio>
-                    <audio id="victorySound" src="/src/sounds/Victory.mp3"></audio>
-                    <audio id="defeatSound" src="/src/sounds/Death.mp3"></audio>
+                    <div id="obstacles"></div>
+                    <audio id="jumpSound" src="/src/sounds/Jump.wav" preload="auto"></audio>
+                    <audio id="victorySound" src="/src/sounds/Victory.mp3" preload="auto"></audio>
+                    <audio id="defeatSound" src="/src/sounds/Death.mp3" preload="auto"></audio>
+                    <audio id="ambiantSound" src="/src/sounds/Night Ambient 5 (Loop).mp3" preload="auto"></audio>
                     <div id="start-message">
                         <p></p>
                         <p>Utiliser les touches <span><img class="icon" src="./src/img/icons/espace.png" alt="Touche espace du clavier"></span> ou <span><img class="icon" src="./src/img/icons/fleche-vers-le-haut.png" alt="Touche flèche du haut du clavier"></span> pour franchir les obstacles.</p>
@@ -89,7 +88,7 @@
         </div>
     </div>
     <footer>
-        <p>©MelodyJacquemin</p>
+        <p>©MelodyJacquemin - 2024</p>
     </footer>
     <script src="./src/js/script.js"></script>
 </body>

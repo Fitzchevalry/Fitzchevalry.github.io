@@ -12,6 +12,7 @@ header {
     flex-direction: column;
     padding-top: 2rem;
     display: block;
+    padding: 0.5rem 3rem;
 }
 
 #instructions.mp {
