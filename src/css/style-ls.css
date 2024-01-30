@@ -1,15 +1,13 @@
+/* CSS Large Screen */
 
+/* Main Page */
 .mp-container {
     margin: 0;
     padding: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(white,rgb(150, 229, 252), rgb(155, 251, 255)) ;
-    /* background: url(/src/img/backgrounds/FONDRetoucheOk.png);
-    background-position: 0;
-    background-size: 79%; */
-    
+    background: linear-gradient(white,rgb(150, 229, 252), rgb(155, 251, 255)) ;    
 }
 
 .mp{
@@ -17,6 +15,7 @@
     background-repeat: no-repeat;
 }
 
+/* Le jeu */
 #the-game {
     display: flex;
     min-height: 729px;
@@ -30,6 +29,7 @@
     background: linear-gradient(rgb(155, 251, 255),rgb(150, 229, 252), white ) ;
 }
 
+/* Reveal CV */
 .hide-cv {
     min-height: 729px;
     background-size: 80%;

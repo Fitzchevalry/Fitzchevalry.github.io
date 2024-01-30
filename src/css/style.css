@@ -14,11 +14,13 @@ non-photo-blue: rgba(136, 214, 231, 1);
 tea-green: rgba(195, 233, 197, 1);
 */
 
+/* Font Family
+font-family: 'Roboto', sans-serif;
+font-family: 'Limelight', sans-serif;
+font-family: 'Monoton', sans-serif; */
+
 body {
     font-family: 'Raleway', sans-serif;
-    /* font-family: 'Roboto', sans-serif;
-    font-family: 'Limelight', sans-serif;
-    font-family: 'Monoton', sans-serif; */
 }
 
 p {
@@ -110,7 +112,7 @@ a span {
 }
 
 
-/*Main Page*/
+/*Main Page Presentation*/
 .mp{
     flex: auto;
     display: flex;
@@ -149,7 +151,7 @@ h2 {
     font-size: 0.7rem;
 }
 
-/* Le Jeu */
+/* Page Le Jeu */
 #the-game {
     padding: 6rem 4rem;
     background: url(/src/img/backgrounds/reversefox.png) center center /cover;
@@ -190,6 +192,7 @@ h2 {
 }
 
 /* Game Elements */
+/* images */
 #background-sky {
     position: absolute;
     width: 100%;
@@ -254,30 +257,7 @@ h2 {
     display: none;
 }  
 
-/* #roc2 {
-    position: absolute;
-    bottom: -15px;
-    left: 0;
-    width: 86.5px;
-    height: 60px;
-    background : url(/src/img/obstacles/obstacle2.png); 
-    background-size: cover;
-    z-index: 3;
-    display: none;
-}  
-
-#roc3 {
-    position: absolute;
-    bottom: -15px;
-    left: 0;
-    width: 90px;
-    height: 60px;
-    background : url(/src/img/obstacles/obstacle3.png); 
-    background-size: cover;
-    z-index: 3;
-    display: none;
-}   */
-
+/* Messages */
 #start-message {
     position: absolute;
     top : 25%;
@@ -325,9 +305,21 @@ h2 {
     text-align: center;
     display: none;
     z-index: 10;
-    cursor: url(/src/img/icons/paw-solidbcl.svg), pointer;
+    cursor: url(/src/img/icons/paw-solidblc.png), pointer;
 }
 
+#score {
+    display: flex;
+    z-index: 10;
+    position: absolute;
+    text-align: end;
+    margin-top: 2rem;
+    margin-left: 75%;
+    font-family: 'Limelight', sans-serif;
+    color: rgba(56, 37, 65, 1);
+}
+
+/* Buttons */
 #restart-button {
     background-color: rgba(56, 37, 65, 0.966);
     border: 1px solid rgba(255, 255, 255, 0.8);
@@ -344,17 +336,6 @@ h2 {
     box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
     color: rgba(136, 214, 231, 1);
     }
-
-#score {
-    display: flex;
-    z-index: 10;
-    position: absolute;
-    text-align: end;
-    margin-top: 2rem;
-    margin-left: 75%;
-    font-family: 'Limelight', sans-serif;
-    color: rgba(56, 37, 65, 1);
-}
 
 /* Fenêtre Win */
 #win-game {
@@ -386,7 +367,6 @@ h2 {
 }
 
 /* Reveal CV */
-
 
 .hide-cv {
     display: flex;
@@ -420,7 +400,6 @@ h2 {
 }
 
 
-
 /* Footer */
 
 footer {
@@ -433,31 +412,3 @@ footer p {
     text-align: center;
     font-size: 0.7rem;
 }
-
-
-/*main {
-    width: 100vw;
-    height: 80vh;
-    background-image: url(./src/FONDRetoucheOk.png);
-    background-size: cover;
-    background-position-y: -370px ;
-    position:static;
-}
-.mp {
-    display: flex;
-    flex: auto;
-    align-items: center;
-    justify-content: center;
-}
-
-.monJeu {
-    display: flex;
-    min-width: 960px;
-    width: 1200px;
-    height: 540px;
-    margin-bottom: 8rem;
-    border: 0.5rem solid rgba(56, 37, 65, 1);
-    background-image: url(./src/backgrounds/game_background_1.png);
-    background-repeat: repeat;
-    background-size: contain ;    
-}*/
